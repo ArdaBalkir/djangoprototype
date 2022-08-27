@@ -1,0 +1,39 @@
+{% extends 'store/main.html'%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% block content%}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id="form-wrapper">
+            <form id="form">
+                <div id="user-info">
+                    <p>Information:</p>
+                        <hr>
+                    <div class="form-field">
+                        
+                        <input required class="form-control" type="email" name="email" placeholder="Email..">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="address" placeholder="Address..">
+                    </div>
+                </div>
+                <hr>
+                <input id="form-button" type="submit" value="Continue">
+                
+                <a  class="btn" style="float: right;" href="/cart/">&#x2190; Back to Cart</a>
+                    <hr>
+                    <h5>Total: {{order.cartTotal|floatformat:2}}£ </h5>
+            </form>
+
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="box-element hidden" id="payment-info">
+            <p>Payment Options</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content%}
