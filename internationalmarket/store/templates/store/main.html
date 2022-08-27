@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load socialaccount %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-
+    <script type="text/javascript">
+      var user = '{{ request.user }}'
+    </script>
 </head>
 <body>
     
@@ -23,9 +26,13 @@
             
             
           </div>
-          <div class="form-inline my-2 my-lg-0">
-            <a href="#"class="btn">Login with Google</a>
-                        
+          <div class="form-inline my-2 my-lg-auto">
+            {% if user.is_authenticated %}
+            <p>Welcome {{ user.username }}!</p>
+            <a href="{% provider_login_url 'google' %}" class="btn">Logout</a>
+            {% else %}
+            <a href="{% provider_login_url 'google' %}" class="btn">Login With Google</a>
+            {% endif %}      
             <a href="{% url 'cart' %}">
                <img  id="cart-icon" src="{% static 'images/cart.png' %}">
             </a>
@@ -41,6 +48,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="/internationalmarket/static/js/addtocart.js"></script>
+    <script src="{% static 'js/addtocart.js' %}"></script>
   </body>
 </html>
