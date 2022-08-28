@@ -10,4 +10,5 @@ urlpatterns = [
     path('checkout/', views.checkout, name="checkout"),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view()),
+    path('update_item/', views.updateItem, name="updateitem"),
 ]
